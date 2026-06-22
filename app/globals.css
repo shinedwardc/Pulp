@@ -9,50 +9,50 @@
    ========================================================================== */
 
 .pulp {
-  --paper: oklch(0.99 0 0);
-  --ink: oklch(0.17 0 0);
-  --soft: oklch(0.44 0 0);
-  --line: oklch(0.17 0 0 / 0.14);
-  --acid: #ff5a1f; /* Safety Orange */
-  --acidink: color-mix(in oklab, var(--acid), black 40%);
+	--paper: oklch(0.99 0 0);
+	--ink: oklch(0.17 0 0);
+	--soft: oklch(0.44 0 0);
+	--line: oklch(0.17 0 0 / 0.14);
+	--acid: #ff5a1f; /* Safety Orange */
+	--acidink: color-mix(in oklab, var(--acid), black 40%);
 }
 
 @media (prefers-color-scheme: dark) {
-  .pulp {
-    --paper: oklch(0.17 0.004 250);
-    --ink: oklch(0.95 0.004 250);
-    --soft: oklch(0.66 0.006 250);
-    --line: oklch(0.95 0.004 250 / 0.16);
-    --acidink: color-mix(in oklab, var(--acid), white 12%);
-  }
+	.pulp {
+		--paper: oklch(0.17 0.004 250);
+		--ink: oklch(0.95 0.004 250);
+		--soft: oklch(0.66 0.006 250);
+		--line: oklch(0.95 0.004 250 / 0.16);
+		--acidink: color-mix(in oklab, var(--acid), white 12%);
+	}
 }
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-ink: var(--ink);
-  --color-soft: var(--soft);
-  --color-line: var(--line);
-  --color-acid: var(--acid);
-  --color-acidink: var(--acidink);
-  --font-display: var(--font-space-grotesk), sans-serif;
-  --font-mono: var(--font-jetbrains-mono), monospace;
-  --animate-eq: eq 1s ease-in-out infinite;
+	--color-paper: var(--paper);
+	--color-ink: var(--ink);
+	--color-soft: var(--soft);
+	--color-line: var(--line);
+	--color-acid: var(--acid);
+	--color-acidink: var(--acidink);
+	--font-display: var(--font-space-grotesk), sans-serif;
+	--font-mono: var(--font-jetbrains-mono), monospace;
+	--animate-eq: eq 1s ease-in-out infinite;
 }
 
 /* The one loud move, even on selection. */
 .pulp ::selection {
-  background: var(--acid);
-  color: #111;
+	background: var(--acid);
+	color: #111;
 }
 
 @keyframes eq {
-  0%,
-  100% {
-    transform: scaleY(0.4);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
+	0%,
+	100% {
+		transform: scaleY(0.4);
+		opacity: 0.5;
+	}
+	50% {
+		transform: scaleY(1);
+		opacity: 1;
+	}
 }
