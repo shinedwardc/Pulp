@@ -2,6 +2,8 @@
 
 > **Punk-utilitarian.** Software you own, not software that owns you. The interface looks like a tool — a terminal, a printing press, a piece of equipment — not a feed. Every element earns its place. No ranking, no infinite scroll, no decoration for decoration's sake.
 
+**Implemented in:** design tokens live in `app/globals.css`; fonts are loaded in `app/layout.tsx`. This document is the spec — keep it and those files in sync.
+
 ---
 
 ## 1. Principles
@@ -16,7 +18,7 @@
 
 ## 2. Color
 
-Tokens are CSS custom properties on the root. Light is default; dark is a true invert (the accent stays put).
+Tokens are CSS custom properties on the root, defined in `app/globals.css`. Light is default; dark is a true invert (the accent stays put).
 
 | Token | Light | Dark | Use |
 |---|---|---|---|
@@ -44,7 +46,7 @@ Tokens are CSS custom properties on the root. Light is default; dark is a true i
 
 ## 3. Typography
 
-Three families, each with a job. Headlines are swappable (`grotesk` default / `serif` / `mono`); UI labels are **always** mono.
+Three families, each with a job. Fonts are loaded in `app/layout.tsx` and exposed as family variables (`--display`, etc.) in `app/globals.css`. Headlines are swappable (`grotesk` default / `serif` / `mono`); UI labels are **always** mono.
 
 | Role | Family | Notes |
 |---|---|---|
