@@ -1,0 +1,12 @@
+# Normalize line endings across OSes (WSL2/Windows/macOS/Linux).
+# Git stores text with LF and checks it out as LF everywhere, so a
+# Windows-side editor can't reintroduce CRLF churn into the diff.
+* text=auto eol=lf
+
+# Binary assets: never touch their bytes.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg text eol=lf
+*.ico binary
