@@ -61,6 +61,7 @@ duplicate it here; update it there.
 | Architecture & the LLM boundary | §4 below + README "How it works" |
 | Config / env vars | README "Configuration" + §6 |
 | TypeScript compiler settings | `tsconfig.json` |
+| Branch & commit naming | §10 (branches) + §11 (commits) below |
 
 If a convention isn't written down anywhere, match the surrounding code and, when it's a
 non-obvious decision, record the rationale in `documents/`.
@@ -148,11 +149,57 @@ When tests are introduced:
   `documents/` explaining the *why*, consistent with how that folder is used.
 - **Don't introduce dependencies casually.** This project values owning its own code. Prefer
   the standard library and what's already here; justify any new package.
-- **Branch, don't commit to `master` directly.** Run `pnpm lint` before committing.
+- **Branch, don't commit to `master` directly.** Name branches per §10. Run `pnpm lint` before committing.
 
 ---
 
-## 10. Commit conventions
+## 10. Branch naming
+
+Branches follow **[Conventional Branch 1.1.0](https://conventionalbranch.org)**. Never
+commit to `master` directly (§9) — always branch off it. Format:
+
+```
+<type>/<description>
+```
+
+Trunk branches (`master`) carry no prefix.
+
+**Prefixes:**
+
+| Prefix | When |
+|---|---|
+| `feature/` (or `feat/`) | A new feature. |
+| `bugfix/` (or `fix/`) | A bug fix. |
+| `hotfix/` | An urgent production fix. |
+| `release/` | Release prep — version numbers, so dots are allowed here (e.g. `release/v1.2.0`). |
+| `chore/` | Everything else — docs, dependencies, config, tooling. |
+
+Conventional Branch's prefix set is narrower than the commit types in §11: work that lands
+as a `docs` / `style` / `refactor` / `test` / `ci` commit belongs on a `chore/` branch.
+Optional AI-source prefixes (`ai/`, `claude/`, `copilot/`, `cursor/`, `codex/`) are
+permitted when authorship matters more than intent (e.g. `claude/…`), but prefer a purpose
+prefix above.
+
+**Rules:**
+
+- Lowercase `a-z`, digits `0-9`, and `-` to separate words — no spaces, underscores, or
+  other special characters. (Dots only in `release/` version numbers.)
+- No consecutive `-` / `.`, and no leading or trailing `-` / `.` in the description.
+- Descriptive but concise; include a ticket number when there is one, e.g.
+  `feature/issue-123-add-login`.
+
+**Examples:**
+
+```
+feature/multi-source-feeds
+fix/empty-rss-feed
+chore/agents-branch-naming
+release/v1.2.0
+```
+
+---
+
+## 11. Commit conventions
 
 Commits follow **[Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)**.
 Format:
