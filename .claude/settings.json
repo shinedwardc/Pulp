@@ -1,0 +1,33 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "allow": [
+      "Read",
+      "Grep",
+      "Glob",
+      "Bash(git status)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(npm run*)",
+      "Bash(pnpm *)",
+      "Bash(uv run*)",
+      "Bash(pytest*)",
+      "Bash(docker compose*)"
+    ],
+    "ask": [
+      "Bash(curl*)",
+      "Bash(git commit*)",
+      "Bash(git push*)",
+      "Bash(rm*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/*.pem)",
+      "Read(./**/*credentials*)"
+    ]
+  }
+}
