@@ -18,7 +18,7 @@ owner.** Keep model usage isolated and the rest of the app working without it.
 |---|---|
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript, `strict` mode |
-| Runtime | Node.js 20+ |
+| Runtime | Node.js 22.13+ (floor set by pnpm 11) |
 | Package manager | **pnpm** |
 | Styling | Tailwind CSS v4 (PostCSS) |
 | Lint/format | Biome |

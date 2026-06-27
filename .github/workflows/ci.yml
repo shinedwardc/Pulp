@@ -1,0 +1,37 @@
+name: CI
+
+# Gate every PR into master, and re-check master itself after a merge lands.
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+# A new push to the same ref makes older runs pointless — cancel them.
+concurrency:
+  group: ci-${{ github.ref }} # Bucket runs by git ref
+  cancel-in-progress: true # Kill any still-running older run in the bucket when a new one starts
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6 # Get code into the VM
+
+      # Install pnpm onto the VM's PATH
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v6 # Install Node.js + wire up dependency caching
+        with:
+          node-version: 22.13 # the real floor: pnpm 11 requires >=22.13. Matches package.json "engines"; test the floor, don't drift past it
+          cache: pnpm
+
+      # --frozen-lockfile fails if pnpm-lock.yaml is stale instead of silently editing it.
+      - run: pnpm install --frozen-lockfile
+
+      # The two gates AGENTS.md §7 asks for before merge. No secrets needed:
+      # the app is force-dynamic, so nothing calls the feed or the model at build time.
+      - run: pnpm lint
+      - run: pnpm build
