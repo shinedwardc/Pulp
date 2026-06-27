@@ -25,7 +25,7 @@ jobs:
 
       - uses: actions/setup-node@v6 # Install Node.js + wire up dependency caching
         with:
-          node-version: 20 # the floor declared in package.json "engines"; test it, don't drift past it
+          node-version: 22.13 # the real floor: pnpm 11 requires >=22.13. Matches package.json "engines"; test the floor, don't drift past it
           cache: pnpm
 
       # --frozen-lockfile fails if pnpm-lock.yaml is stale instead of silently editing it.
