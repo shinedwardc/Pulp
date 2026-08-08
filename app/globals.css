@@ -34,7 +34,7 @@
 	--color-line: var(--line);
 	--color-acid: var(--acid);
 	--color-acidink: var(--acidink);
-	--font-display: var(--font-space-grotesk), sans-serif;
+	--font-display: var(--font-lora), serif;
 	--font-mono: var(--font-jetbrains-mono), monospace;
 	--animate-eq: eq 1s ease-in-out infinite;
 }

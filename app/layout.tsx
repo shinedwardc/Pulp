@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { JetBrains_Mono, Lora } from "next/font/google";
 import "./globals.css";
 
 // Display + body voice (the human's words). Variable weight 400–700.
-const spaceGrotesk = Space_Grotesk({
-	variable: "--font-space-grotesk",
+const lora = Lora({
+	variable: "--font-lora",
 	subsets: ["latin"],
 });
 
@@ -28,7 +28,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
+			className={`${lora.variable} ${jetbrainsMono.variable} h-full antialiased`}
 		>
 			<body className="pulp min-h-full flex flex-col">{children}</body>
 		</html>
