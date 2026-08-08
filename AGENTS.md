@@ -4,7 +4,7 @@ Working agreement for AI agents (and humans) contributing to **Pulp** — a pers
 self-owned news digest. Read this first. It links out to the deeper docs rather than
 repeating them, so treat those as the source of truth where pointed:
 
-- **[README.md](README.md)** — what Pulp is, how it works, configuration, roadmap.
+- **[README.md](README.md)** — what Pulp is, how it works, configuration, license.
 - **[DESIGN.md](DESIGN.md)** — the punk-utilitarian design system. **Authoritative for any UI work.**
 
 The guiding principle of the whole project: **the AI is a swappable convenience, never an
@@ -77,7 +77,7 @@ and all UI must function without it.
 - All structured output goes through the JSON schema in `digest.ts`. Schema limits to respect:
   every object needs `additionalProperties: false`; numeric/string constraints
   (`minimum`, `maxLength`, …) are **not** supported — enforce those in prompt/code instead.
-- The roadmap (README) is to route through a model-agnostic gateway. Keep changes here
+- A model-agnostic gateway may replace the direct provider call someday. Keep changes here
   swappable: one function, one boundary.
 - When building anything AI-related, default to current, capable models. For provider and
   model specifics (model IDs, pricing, structured-output rules, SDK usage), consult the

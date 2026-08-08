@@ -18,14 +18,14 @@ Feeds optimize for engagement. Every news article in a feed is deliberately chos
 
 ## Getting started
 
-**Prerequisites:** Node.js 20+, [pnpm](https://pnpm.io), and an [Anthropic API key](https://console.anthropic.com).
+**Prerequisites:** Node.js 22.13+, [pnpm](https://pnpm.io) 11, and an [Anthropic API key](https://console.anthropic.com).
 
 ```bash
 # 1. install
 pnpm install
 
-# 2. configure — create .env.local
-echo "ANTHROPIC_API_KEY=sk-ant-..." > .env.local
+# 2. configure — copy the template and fill in your key
+cp .env.example .env.local
 
 # 3. run
 pnpm dev
@@ -35,7 +35,7 @@ Open [http://localhost:3000](http://localhost:3000), type what you want in the d
 
 ## Configuration
 
-Set these in `.env.local`:
+Set these in `.env.local` (start from the committed [`.env.example`](.env.example) template):
 
 | Variable | Required | Default | Notes |
 |---|---|---|---|
@@ -65,11 +65,6 @@ rendered digest        app/digest-client.tsx
 - **`app/api/digest/route.ts`** — ties them together: validate request → fetch feed → summarize.
 - **`app/digest-client.tsx` / `app/page.tsx`** — the UI.
 
-## Roadmap
-
-- **Model-agnostic analysis via a gateway.** Today `app/lib/digest.ts` calls one provider directly. The plan is to route through an OpenAI-compatible gateway like [LiteLLM](https://github.com/BerriAI/litellm), so the model is chosen by config (`MODEL`, `LLM_BASE_URL`, `LLM_API_KEY`) instead of hard-coded. This is the heart of Pulp's punk-software stance: the algorithm that decides what you read should be yours to own, inspect, and swap — not the operator's to fix. The one constraint is that the digest depends on structured (JSON-schema) output, so whatever model you choose must support it to keep the UI reliable.
-- **User-selected RSS feeds.** Today feeds come from `RSS_FEED_URL` at deploy time. The plan is to let the reader pick their sources in the UI — add, remove, and toggle feeds, persisted per user — so the source list is yours to curate, not the operator's to set once.
-
 ## Scripts
 
 ```bash
@@ -79,3 +74,9 @@ pnpm start    # serve the production build
 pnpm lint     # biome check
 pnpm format   # biome format --write
 ```
+
+CI runs `pnpm lint` and `pnpm build` on every PR into `master` ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
+
+## License
+
+[MIT](LICENSE)
