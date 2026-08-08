@@ -50,16 +50,16 @@ Three families, each with a job. Fonts are loaded in `app/layout.tsx` and expose
 
 | Role | Family | Notes |
 |---|---|---|
-| Display / headlines | **Space Grotesk** (var `--display`) | weight 500, `letter-spacing: -0.01em`, `text-wrap: balance` |
-| Body / deks | **Space Grotesk** | 14.5px, `line-height: 1.45`, color `--soft`, `max-width: 64ch` |
+| Display / headlines | **Lora** (var `--display`) | weight 500, `letter-spacing: -0.01em`, `text-wrap: balance` |
+| Body / deks | **Lora** | 14.5px, `line-height: 1.45`, color `--soft`, `max-width: 64ch` |
 | Labels / system / data | **JetBrains Mono** | UPPERCASE, `letter-spacing: .04–.12em`, 10.5–13px |
-| Headline alt | Newsreader (serif) / JetBrains Mono | selectable via the `display` tweak |
+| Header / terminal chrome | **JetBrains Mono** | wordmark and status line both mono — the whole header reads as one machine-voice row |
 
 **Conventions**
-- Anything the *machine* says is monospace: paths, prompts, status, tags, read-times, stamps.
-- Anything a *human* wrote (headlines, deks, the prompt) is the display font.
+- Anything the *machine* says is monospace: paths, prompts, status, tags, read-times, stamps. The header carries this furthest — wordmark included — so the top of the page reads as a terminal, not a masthead.
+- Anything a *human* wrote (headlines, deks, the prompt) is the display font, Lora.
 - Tabular numerals for read-times and counts.
-- Negative tracking on display, generous positive tracking on mono labels — the contrast between the two voices is the type system.
+- Generous positive tracking on mono labels (including the header); light negative tracking on display — the contrast between the two voices is the type system.
 
 ---
 

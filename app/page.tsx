@@ -27,7 +27,7 @@ export default async function Home() {
 	return (
 		<>
 			<header className="sticky top-0 z-[5] flex items-center justify-between border-b-2 border-ink bg-paper px-[clamp(20px,5vw,56px)] py-4">
-				<div className="flex items-center gap-[11px] font-display text-[22px] font-bold tracking-[-0.01em] text-ink">
+				<div className="flex items-center gap-[11px] font-mono text-[22px] font-bold tracking-[0.02em] text-ink">
 					<span className="size-[15px] shrink-0 border-2 border-ink bg-acid" />
 					PULP
 				</div>
