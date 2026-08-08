@@ -29,6 +29,8 @@ Tokens are CSS custom properties on the root, defined in `app/globals.css`. Ligh
 | `--acid` | accent (see below) | accent | Highlights, the one loud move |
 | `--acidink` | `color-mix(in oklab, var(--acid), black 40%)` | `…white 12%` | Accent used as *text* (kept readable) |
 
+**Inverted scope — `.crt`.** The terminal interior re-declares `--paper` / `--ink` / `--soft` / `--line` / `--acidink` to the opposite mode's values (and flips again under `prefers-color-scheme: dark`, so it stays the inverse of the page). Because `@theme` is declared `inline`, utilities resolve their variable at the use site — so `bg-paper`, `border-ink`, `text-soft` all flip inside `.crt` with no className changes. Put `.crt` on the interior, never on the element carrying the outer border.
+
 **Accent options** (curated, not a free picker). Default is **Safety Orange**:
 
 - `#FF5A1F` — Safety Orange **(default)**
@@ -84,15 +86,29 @@ Three families, each with a job. Fonts are loaded in `app/layout.tsx` and expose
 | comfy **(default)** | 30px | 23px | 52px |
 
 - Lists are CSS **grid** with explicit `gap` (`[idx] [content] [read]`), never inline flow. Collapses to 2 columns under 560px.
-- Sticky header bar, 2px bottom rule, accent square logo mark.
+- The page is **one centered terminal window**, vertically centered in the viewport (`my-auto`, so long output scrolls instead of clipping). Stacking order, top to bottom: masthead → tab strip → terminal. No sticky header.
+- Masthead is the only part of the page in the human voice: accent square + `PULP` wordmark, then a two-sentence dek at `max-width: 52ch`. It sits *outside* the terminal.
+- Terminal minimum height `clamp(240px, 34vh, 340px)` so it reads as a window even when empty.
 
 ---
 
 ## 6. Components
 
-**Console (prompt input)**
-- Bordered box with a black title bar showing the file path and a 3-dot window control (one dot filled accent).
-- Body: mono prefix `$ show me —`, then a borderless auto-growing textarea in the display font. The input *is* the headline.
+**Terminal window**
+- The main surface. 2px ink border in page scope; the interior carries `.crt`, which re-declares the four neutrals so every token-driven utility inside it flips. The screen is always the inverse of the paper it sits on — the accent never moves.
+- **Tab** — square-shouldered, not a browser's rounded one. Ink fill, 2px ink border with `border-b-0`, inset 14px from the left, sitting flush on the frame's top edge so tab and border merge. Contents: accent square (the favicon) + `today.digest`. No close ✗ — a control that does nothing is decoration.
+- Opposite the tab, on paper: `● rss · N in feed`, `local-first`, the short date.
+
+**Login banner**
+- One dim mono line *above* the prompt: `# enter runs your request · shift+enter adds a line`. Usage text goes before the prompt because nothing can print below a prompt. Always shown — never conditional on the input being empty, or the layout jumps on first keystroke.
+
+**Prompt line (`pulp:~/today$`)**
+- Mono, `line-height: 1.7`, tracking **0** — the `ch` unit must measure exactly one cell.
+- Two stacked layers: a visible mirror `<div>` in normal flow (so the box auto-grows, no JS resize), and a transparent `<textarea>` absolutely positioned over it with `text-indent: <prompt.length>ch` to clear the prompt on the first line. Both share one type ramp so they wrap identically.
+- Prompt is coloured like a real shell: host in `--acidink`, path in `--soft`, `$` in `--ink`.
+- **Block cursor** — sits *on* the character at `selectionStart`, not between characters. Focused: reversed video, blinking on a `step-end` 1.06s cycle that swaps background/foreground so the character stays readable through both phases (never opacity — that hides the glyph). Blurred: hollow 1.5px outline, static. Honours `prefers-reduced-motion` by holding solid.
+- The whole line is a `<label>` wrapping the textarea, so clicking anywhere on it focuses — no ref, no click handler.
+- **Enter** runs the request; **shift+enter** adds a line.
 
 **Primary button — `Generate ▸ 5-min`**
 - Accent fill, 2px ink border, mono uppercase label, hard offset shadow that presses in on click. Disabled → 50% opacity, shadow frozen.
